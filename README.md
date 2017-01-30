@@ -2,7 +2,15 @@
 This document serves as a reference for how to accomplish different tasks in spark on windows. It includes both local and cluster methods.
 
 ## Spark Configuration
---driver-memory to max --executor-memory for cluster
+There are tons of configuration options that can be set at the command line or with Spark itself. Read the [Spark Configuration](http://spark.apache.org/docs/latest/configuration.html) manual for a complete overview.
+
+Here I would like to note two important settings `driver-memory` and `executor-memory`. These settings must be initiated when starting Spark and cannot be changed by creating a new session or context. The default for these is 1GB so if you are using a system with much more available memory and would like to utilize it you must change these settings. They can be set in a .conf file to be read whenever starting spark or set at the command line with the following:
+
+```
+--driver-memory *some value* --executor-memory *some value*
+```
+
+If you do not have a .conf file setup include these settings with any startup script you use, be it `pyspark` or `spark-submit`. 
 
 ## Setting up Python Notebooks
 Pyspark can be manipulated with environmental variables to direct python to open in a number of ways. You can use the Ipython shell or a notebook such as Jupyter.
